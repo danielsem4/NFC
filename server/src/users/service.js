@@ -2,9 +2,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { Users } = require("../modules");
 
+const oneDay = 1000 * 60 * 60 * 24;
+
 module.exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    console.log(req.body);
+    const { email, password, rememberMe } = req.body;
     const user = await Users.findOne({
       where: { email: email.toLocaleLowerCase() },
     });
@@ -12,9 +15,17 @@ module.exports.login = async (req, res) => {
 
     if (bcrypt.compareSync(password, user.password)) {
       const { id, fullName } = user;
-      const token = jwt.sign({ id, fullName, email }, process.env.JWT_KEY);
+
+      const jwtConfig = rememberMe ? { expiresIn: "24h" } : undefined;
+      const maxAge = rememberMe ? oneDay : undefined;
+
+      const token = jwt.sign(
+        { id, fullName, email },
+        process.env.JWT_KEY,
+        jwtConfig
+      );
       return res
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, { httpOnly: true, maxAge })
         .status(200)
         .send("Successfully login");
     }

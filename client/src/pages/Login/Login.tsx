@@ -1,6 +1,5 @@
 import { useState } from "react";
 import animationData from "../../assets/lottie/21474-medical-frontliners.json";
-import animationLoading from "../../assets/lottie/loadingDoctor.json";
 import {
   Container,
   StyledLottie,
@@ -9,10 +8,12 @@ import {
   FormTitle,
   StyledButton,
   StyledInput,
-  LoadingScreen,
+  CheckBox,
+  RememberMeWrapper,
+  RememberMeText,
 } from "./Login.styles";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -20,8 +21,8 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-
-  const test = "ddd77f03-0a7e-45f7-91e1-747bd1bac495";
+  const { state } = useLocation();
+  console.log(state);
 
   const navigate = useNavigate();
   const handlSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -31,14 +32,17 @@ const Login = () => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    // route to the patient from the tag / to add new patient and connect him to new tag
+    const nextPath = state?.patientId ? `/Patient/${state.patientId}` : "/Home";
+
     axios
       .post("/api/users/login", data)
-      .then((res) => navigate(`/Patient/${test}`))
-      .catch((error) => toast.error(error))
+      .then((res) => navigate(nextPath))
+      .catch((error) => toast.error("Wrong email/password, pls try again"))
       .finally(() => setLoading(false));
   };
 
-  return !loading ? (
+  return (
     <Container>
       <StyledLottie animationData={animationData} />
       <FormWrapper onSubmit={handlSubmit}>
@@ -71,15 +75,20 @@ const Login = () => {
             ),
           }}
         />
-        <StyledButton type="submit" variant="contained" disabled={loading}>
+        <RememberMeWrapper>
+          <CheckBox name="rememberMe" />
+          <RememberMeText>Remember me</RememberMeText>
+        </RememberMeWrapper>
+        <StyledButton
+          loading={loading}
+          type="submit"
+          variant="contained"
+          disabled={loading}
+        >
           Login
         </StyledButton>
-        <ForgotPassword>Forgot password?</ForgotPassword>
+        <ForgotPassword>הזן מייל וסיסמה כללית</ForgotPassword>
       </FormWrapper>
-    </Container>
-  ) : (
-    <Container>
-      <LoadingScreen animationData={animationLoading} />
     </Container>
   );
 };

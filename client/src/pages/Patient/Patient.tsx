@@ -4,10 +4,9 @@ import {
   PatientImage,
   Card,
   CardContentWrapper,
-  Title,
   Text,
 } from "./Patient.style";
-import patient from "../../assets/img/patient1.png";
+import { MuiNavbar } from "../../components/styledComponents/MuiNavbar";
 
 interface Patient {
   fullName: string;
@@ -23,11 +22,12 @@ const Patient = () => {
 
   return (
     <Container>
+      <MuiNavbar />
       <Card>
         <PatientImage title="patient img" src={patients.imageUrl} />
         <CardContentWrapper>
-          <Text>Name: {patients.fullName}</Text>
-          <Text>ID: {patients.zehutNumber}</Text>
+          <Text>שם: {patients.fullName}</Text>
+          <Text>תז. {patients.zehutNumber}</Text>
         </CardContentWrapper>
       </Card>
     </Container>
