@@ -7,7 +7,7 @@ import {
 import Login from "./pages/Login/Login";
 import Patient from "./pages/Patient/Patient";
 import Home from "./pages/Home/Home";
-import patientLoader from "./pages/Patient/Loader";
+import axios from "axios";
 import ErrorBoundary from "./pages/Patient/Error";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +28,11 @@ const router = createBrowserRouter([
   {
     path: "Patient/:patientId",
     element: <Patient />,
-    loader: patientLoader,
+    loader: async ({ params }) => {
+      const { patientId } = params;
+      const res = await axios.get(`/api/patients/${patientId}`);
+      return res.data;
+    },
     errorElement: <ErrorBoundary />,
   },
 ]);

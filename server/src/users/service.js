@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { Users } = require("../modules");
+const { Users } = require("../models");
 
 const oneDay = 1000 * 60 * 60 * 24;
 

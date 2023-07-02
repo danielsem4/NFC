@@ -1,14 +1,13 @@
 import axios from "axios";
+import { LoaderFunctionArgs } from "react-router-dom";
 
-interface PatientLoaderType{
-    params: {
-        patientId: string}
-}
 
-const patientLoader = async( {params}: PatientLoaderType ) => {
-    const { patientId } = params
-    const res = await axios.get(`/api/patients/${patientId}`)
-    return res.data 
+const patientLoader = ( {params}: LoaderFunctionArgs ) => {
+    return async() => {
+        const { patientId } = params
+        const res = await axios.get(`/api/patients/${patientId}`)
+        return res.data 
+    } 
 }
 
 export default patientLoader;

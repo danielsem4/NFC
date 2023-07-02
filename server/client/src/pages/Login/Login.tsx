@@ -40,8 +40,8 @@ const Login = () => {
 
     axios
       .post("/api/users/login", data)
-      .then((res) => navigate(nextPath))
-      .catch((error) => toast.error("Wrong email/password, pls try again"))
+      .then(() => navigate(nextPath))
+      .catch(() => toast.error("Wrong email/password, pls try again"))
       .finally(() => setLoading(false));
   };
 
