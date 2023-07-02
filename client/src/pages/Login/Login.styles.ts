@@ -3,6 +3,7 @@ import Lottie from "lottie-react";
 import { TextField } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 
+
 export const Container = styled.div`
   min-height: 100vh;
   min-height: 100dvh;
@@ -14,6 +15,22 @@ export const Container = styled.div`
   flex-wrap: wrap;
 `;
 
+export const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const LogoImg = styled.img`
+  max-width: 40%;
+  
+  @media (max-width: 1147px) {
+    max-width: 50%;
+  }
+`
+
 export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
@@ -22,7 +39,7 @@ export const FormWrapper = styled.form`
   width: 100%;
   margin: 20px;
   padding-inline: 50px;
-  padding-block: 30px;
+  padding-block: 5px;
   max-width: 30rem;
   box-shadow: 0px 6px 12px #000000;
   border-radius: 10px;
@@ -37,8 +54,11 @@ export const StyledLottie = styled(Lottie)`
 export const FormTitle = styled.h2`
   font-size: 2rem;
   margin-block-start: 0;
+  margin-block-end: 0;
   color: #56bd8d;
   font-weight: bold;
+  align-self: flex-start;
+  
 
 `;
 

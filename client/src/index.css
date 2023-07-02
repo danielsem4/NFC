@@ -1,9 +1,9 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  background: linear-gradient(105deg,
+  background: linear-gradient(145deg,
   transparent 0%,
-  #e2eee6 70%,
+  #e1f6fe 70%,
   transparent 95%,
   transparent 100%);
   min-height: 100%;

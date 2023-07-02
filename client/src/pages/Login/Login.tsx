@@ -11,6 +11,8 @@ import {
   CheckBox,
   RememberMeWrapper,
   RememberMeText,
+  LogoImg,
+  TitleWrapper,
 } from "./Login.styles";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -18,6 +20,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { toast } from "react-toastify";
+import Logo from "../../assets/img/Logo.png";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -46,7 +49,10 @@ const Login = () => {
     <Container>
       <StyledLottie animationData={animationData} />
       <FormWrapper onSubmit={handlSubmit}>
-        <FormTitle>Login</FormTitle>
+        <TitleWrapper>
+          <LogoImg src={Logo} title="Logo" />
+          <FormTitle>Login</FormTitle>
+        </TitleWrapper>
         <StyledInput
           name="email"
           type="email"
