@@ -46,6 +46,7 @@ export const Text = styled.p`
   align-self: flex-end;
   margin: 0;
   font-weight: bold;
+  direction: rtl;
 `
 export const PatientImage = styled.img`
   width: 100%;
